@@ -8,10 +8,13 @@ const cors = require("cors");
 
 const app = express();
 
-// Middleware
-app.use(cors());
 app.use(express.json());
-
+// Cấu hình lại middleware cors
+app.use(cors({
+  origin: 'https://it4409-user-crud-fc07.web.app', // URL Firebase Hosting của bạn
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 mongoose
   .connect(MONGODB_URI)
   .then(() => console.log("Connected to MongoDB"))
